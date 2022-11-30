@@ -18,9 +18,7 @@ export class OrderFeeDetailComponent {
     this.code = this.rou.snapshot.paramMap.get('code');
     this.ser.getShippingOrderDetail(this.code).subscribe(
       (res:any)=>{
-        if(res.result.ok){
-          this.data = res.data;
-        } else this.mess.error(res.result.message);
+          this.data = res;
       },
       (error)=>{
         this.mess.error("Có lỗi xảy ra!");

@@ -20,9 +20,7 @@ export class OrderFeeListComponent {
     //Add 'implements OnInit' to the class.
     this.orderListService.getShippingFeeList().subscribe((res : any) => {
       console.log(res);
-      if (res.result.ok) {
-        this.listOfData = [...res.data];
-      }else this.mess.error(res.result.message)
+        this.listOfData = [...res];
     },
     (error) => {
       this.mess.error('Có lỗi xảy ra!')
