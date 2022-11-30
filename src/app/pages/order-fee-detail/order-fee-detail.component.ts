@@ -4,11 +4,11 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 import { OrderListService } from 'src/app/service/order-list.service';
 
 @Component({
-  selector: 'app-order-detail',
-  templateUrl: './order-detail.component.html',
-  styleUrls: ['./order-detail.component.less']
+  selector: 'app-order-fee-detail',
+  templateUrl: './order-fee-detail.component.html',
+  styleUrls: ['./order-fee-detail.component.less']
 })
-export class OrderDetailComponent {
+export class OrderFeeDetailComponent {
   data : any;
   code : any;
   constructor(private ser : OrderListService, private mess: NzMessageService, private rou : ActivatedRoute){}

@@ -15,18 +15,14 @@ export class LayoutComponent implements OnInit {
       url: '',
     },
     {
-      title: 'Quản lý đơn hàng',
+      title: 'Danh sách đơn hàng',
       icon: 'database',
-      subMenus: [
-        {
-          title: 'Danh sách đơn hàng',
-          url: `shipping-order-list`,
-        },
-        {
-          title: 'Tạo đơn hàng',
-          url: `shipping-order-list/create`,
-        },
-      ],
+      url: 'shipping-order-list',
+    },
+    {
+      title: 'Phí ship',
+      icon: 'transaction',
+      url: 'shipping-order-fee-list',
     },
   ];
 

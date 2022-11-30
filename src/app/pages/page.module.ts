@@ -18,10 +18,13 @@ import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { OrderDetailComponent } from './order-detail/order-detail.component';
+import { OrderFeeListComponent } from './order-fee-list/order-fee-list.component';
+import { OrderFeeDetailComponent } from './order-fee-detail/order-fee-detail.component';
+import { NzMessageModule } from 'ng-zorro-antd/message';
 
 
 @NgModule({
-  declarations: [DashboardComponent, ShippingOrderListComponent, OrderDetailComponent],
+  declarations: [DashboardComponent, ShippingOrderListComponent, OrderDetailComponent, OrderFeeListComponent, OrderFeeDetailComponent],
   imports: [
     CommonModule,
     PageRoutingModule,
@@ -38,7 +41,8 @@ import { OrderDetailComponent } from './order-detail/order-detail.component';
     ShippingOrderListModule,
     HttpClientModule,
     NzInputModule,
-    NzFormModule
+    NzFormModule,
+    NzMessageModule
   ],
 })
 export class DashboardModule {}

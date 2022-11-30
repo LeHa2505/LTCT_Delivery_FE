@@ -1,1 +1,22 @@
-<p>order-detail works!</p>
+<h2>Chi tiết đơn vận chuyển</h2>
+<app-loading *ngIf="!data"></app-loading>
+<div *ngIf="data" style="margin: 3em;">
+    <p>
+        <b>ID : </b>{{data.id}}
+    </p>
+    <p>
+        <b>Mã đơn hàng : </b>{{data.orderCode}}
+    </p>
+    <p>
+        <b>Ngày tạo đơn vận chuyển : </b>{{data.createAt}}
+    </p>
+    <p>
+        <b>Trạng thái : </b>{{data.statusCode.desc}}
+    </p>
+    <p>
+        <b>Chi tiết trạng thái : </b>{{data.statusDetail}}
+    </p>
+    <p>
+        <b>Thời gian cập nhật trạng thái : </b>{{data.updateAt}}
+    </p>
+</div>
