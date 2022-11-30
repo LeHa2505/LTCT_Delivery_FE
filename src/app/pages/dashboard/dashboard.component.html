@@ -10,7 +10,7 @@
           ><span
             class="card-icon"
             nz-icon
-            nzType="user"
+            nzType="pause-circle"
             nzTheme="outline"
           ></span>
         </div>
@@ -22,7 +22,7 @@
           ><span
             class="card-icon"
             nz-icon
-            nzType="team"
+            nzType="send"
             nzTheme="outline"
           ></span>
         </div>
@@ -34,7 +34,7 @@
           ><span
             class="card-icon"
             nz-icon
-            nzType="user-add"
+            nzType="check"
             nzTheme="outline"
           ></span>
         </div>
@@ -46,7 +46,7 @@
           ><span
             class="card-icon"
             nz-icon
-            nzType="user-switch"
+            nzType="close-circle"
             nzTheme="outline"
           ></span>
         </div>
@@ -64,6 +64,7 @@
 
       <div class="chart-wrapper card">
         <canvas
+          [height]="100"
           baseChart
           [datasets]="barChartData"
           [labels]="barChartLabels"
