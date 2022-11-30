@@ -12,16 +12,16 @@ export class OrderListService {
   constructor(private http: HttpClient) {}
 
   getShippingOrder(): Observable<any> {
-    return this.http.get(environment.BASE_API_URI.BASE_SERVICE_SP9_API + 'api/v2/shipping');
+    return this.http.get(environment.BASE_API_URI.BASE_SERVICE_SP9_API + 'api/shipping');
   }
   getShippingOrderDetail(code : any): Observable<any> {
-    return this.http.get(environment.BASE_API_URI.BASE_SERVICE_SP9_API + 'api/v2/shipping' + code);
+    return this.http.get(environment.BASE_API_URI.BASE_SERVICE_SP9_API + 'api/shipping' + code);
   }
   getShippingFeeList():Observable<any>{
-    return this.http.get(environment.BASE_API_URI.BASE_SERVICE_SP9_API + 'api/v2/shipping/shipment')
+    return this.http.get(environment.BASE_API_URI.BASE_SERVICE_SP9_API + 'api/shipping/shipment')
   }
   getShippingFeeDetail(code : any):Observable<any>{
-    return this.http.get(environment.BASE_API_URI.BASE_SERVICE_SP9_API + 'api/v2/shipping/shipment' + code)
+    return this.http.get(environment.BASE_API_URI.BASE_SERVICE_SP9_API + 'api/shipping/shipment' + code)
   }
 }
 
