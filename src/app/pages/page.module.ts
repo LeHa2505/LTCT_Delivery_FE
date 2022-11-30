@@ -17,10 +17,11 @@ import { IconsProviderModule } from '../icons-provider.module';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzFormModule } from 'ng-zorro-antd/form';
+import { OrderDetailComponent } from './order-detail/order-detail.component';
 
 
 @NgModule({
-  declarations: [DashboardComponent, ShippingOrderListComponent],
+  declarations: [DashboardComponent, ShippingOrderListComponent, OrderDetailComponent],
   imports: [
     CommonModule,
     PageRoutingModule,
