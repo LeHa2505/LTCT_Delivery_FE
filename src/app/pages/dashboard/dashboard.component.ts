@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
 import { ChartOptions, ChartType, ChartDataset, Scale } from 'chart.js';
+import { NzMessageService } from 'ng-zorro-antd/message';
+import { DashboardService } from 'src/app/service/dashboard.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -16,24 +18,17 @@ export class DashboardComponent implements OnInit {
   ];
 
   // chart
-  barChartNewCustomerOptions: ChartOptions = {
+  barChartOptions: ChartOptions = {
     responsive: true,
   };
-  barChartNewCustomerLabels: string[] = [
-    'Mon',
-    'Tue',
-    'Wed',
-    'Thu',
-    'Fri',
-    'Sat',
-    'Sun',
+  barChartLabels: string[] = [
   ];
-  barChartNewCustomerType: ChartType = 'bar';
-  barChartNewCustomerLegend = false;
-  barChartNewCustomerPlugins = [];
-  barChartNewCustomerData: ChartDataset[] = [
+  barChartType: ChartType = 'bar';
+  barChartLegend = false;
+  barChartPlugins = [];
+  barChartData: ChartDataset[] = [
     {
-      data: [45, 37, 60, 70, 46, 33, 40],
+      data: [],
       backgroundColor: '#7978ff',
       borderColor: '#007bff',
       hoverBackgroundColor: '#597a9e',
@@ -42,85 +37,24 @@ export class DashboardComponent implements OnInit {
     },
   ];
 
-  barChartAccumulatedNumberOfCustomersOptions: ChartOptions = {
-    responsive: true,
-  };
-  barChartAccumulatedNumberOfCustomersLabels: string[] = [
-    'Mon',
-    'Tue',
-    'Wed',
-    'Thu',
-    'Fri',
-    'Sat',
-    'Sun',
-  ];
-  barChartAccumulatedNumberOfCustomersType: ChartType = 'bar';
-  barChartAccumulatedNumberOfCustomersLegend = false;
-  barChartAccumulatedNumberOfCustomersPlugins = [];
-  barChartAccumulatedNumberOfCustomersData: ChartDataset[] = [
-    {
-      data: [45, 37, 60, 70, 46, 33, 40],
-      backgroundColor: '#c47aff',
-      borderColor: '#007bff',
-      hoverBackgroundColor: '#597a9e',
-    },
-  ];
-
-  lineChartNumberOfSellerOptions: ChartOptions = {
-    responsive: true,
-  };
-  lineChartNumberOfSellerLabels: string[] = [
-    'Mon',
-    'Tue',
-    'Wed',
-    'Thu',
-    'Fri',
-    'Sat',
-    'Sun',
-  ];
-  lineChartNumberOfSellerType: ChartType = 'line';
-  lineChartNumberOfSellerLegend = false;
-  lineChartNumberOfSellerPlugins = [];
-  lineChartNumberOfSellerData: ChartDataset[] = [
-    {
-      data: [45, 37, 60, 70, 46, 33, 40],
-      backgroundColor: 'rgb(179 208 249 / 48%)',
-      borderColor: '#007bff',
-      hoverBackgroundColor: '#597a9e',
-      hoverBorderWidth: 10,
-      pointBackgroundColor: '#007bff',
-      pointHoverBorderColor: '#007bff',
-      tension: 0.35,
-      fill: true,
-    },
-  ];
-
-  lineChartUnapprovedCustomersOptions: ChartOptions = {
-    responsive: true,
-  };
-  lineChartUnapprovedCustomersLabels: string[] = [
-    'Mon',
-    'Tue',
-    'Wed',
-    'Thu',
-    'Fri',
-    'Sat',
-    'Sun',
-  ];
-  lineChartUnapprovedCustomersType: ChartType = 'line';
-  lineChartUnapprovedCustomersLegend = false;
-  lineChartUnapprovedCustomersPlugins = [];
-  lineChartUnapprovedCustomersData: ChartDataset[] = [
-    {
-      data: [45, 37, 60, 70, 46, 33, 40],
-      borderColor: '#66bfbf',
-      hoverBackgroundColor: '#597a9e',
-      hoverBorderWidth: 10,
-      pointBackgroundColor: '#66bfbf',
-      pointHoverBorderColor: '#66bfbf',
-    },
-  ];
   // ---
+  data:any;
+  constructor(private ser : DashboardService, private mess : NzMessageService){}
+  ngOnInit(): void {
+    this.ser.getDashboard().subscribe(
+      (res:any)=>{
+        if (res.result.ok) {
+          this.data = res.data;
+          this.data.orderQuantityPerDay.forEach((element:any) => {
+            this.barChartLabels.push(element.createAt);
+            this.barChartData[0].data.push(element.count);
+          });
+        } else this.mess.error(res.result.message)
+      },
+      (error)=>{
+        this.mess.error('Có lỗi xảy ra!');
+      }
+    )
+  }
 
-  ngOnInit(): void {}
 }

@@ -1,11 +1,12 @@
 <!-- <app-breadcrumb [listBreadCrumb]="listBreadCrumb"></app-breadcrumb> -->
-<div>
+<app-loading *ngIf="!data"></app-loading>
+<div *ngIf="data">
   <!-- card -->
-  <!-- <nz-card>
+  <nz-card>
     <div nz-row>
       <div class="card-item" nz-col [nzXl]="6" [nzSm]="12" [nzXs]="24">
         <div>
-          <span class="card-number">1230</span
+          <span class="card-number">{{data.orderQuantityByStatus['1']}}</span
           ><span
             class="card-icon"
             nz-icon
@@ -13,11 +14,11 @@
             nzTheme="outline"
           ></span>
         </div>
-        <p class="card-title">Số lượng khách hàng</p>
+        <p class="card-title">Đơn hàng chưa giao</p>
       </div>
       <div class="card-item" nz-col [nzXl]="6" [nzSm]="12" [nzXs]="24">
         <div>
-          <span class="card-number">1230</span
+          <span class="card-number">{{data.orderQuantityByStatus['2']}}</span
           ><span
             class="card-icon"
             nz-icon
@@ -25,11 +26,11 @@
             nzTheme="outline"
           ></span>
         </div>
-        <p class="card-title">Số lượng seller</p>
+        <p class="card-title">Đơn hàng đang giao</p>
       </div>
       <div class="card-item" nz-col [nzXl]="6" [nzSm]="12" [nzXs]="24">
         <div>
-          <span class="card-number">1230</span
+          <span class="card-number">{{data.orderQuantityByStatus['3']}}</span
           ><span
             class="card-icon"
             nz-icon
@@ -37,11 +38,11 @@
             nzTheme="outline"
           ></span>
         </div>
-        <p class="card-title">Số lượng KH cần duyệt</p>
+        <p class="card-title">Đơn hàng đã giao</p>
       </div>
       <div class="card-item" nz-col [nzXl]="6" [nzSm]="12" [nzXs]="24">
         <div>
-          <span class="card-number">1230</span
+          <span class="card-number">{{data.orderQuantityByStatus['4']}}</span
           ><span
             class="card-icon"
             nz-icon
@@ -49,92 +50,30 @@
             nzTheme="outline"
           ></span>
         </div>
-        <p class="card-title">Số lượng seller cần duyệt</p>
+        <p class="card-title">Đơn hàng đã hủy</p>
       </div>
     </div>
-  </nz-card> -->
+  </nz-card>
 
   <!-- chart  -->
-  <!-- <div nz-row>
-    <div nz-col [nzSpan]="12">
-      <nz-card>
-        <div class="chart-title">
-          <p>Số lượng khách hàng mới</p>
-        </div>
+  <div>
+    <nz-card>
+      <div class="chart-title">
+        <p>Số đơn hàng tiếp nhận theo ngày</p>
+      </div>
 
-        <div class="chart-wrapper card">
-          <canvas
-            baseChart
-            [datasets]="barChartNewCustomerData"
-            [labels]="barChartNewCustomerLabels"
-            [options]="barChartNewCustomerOptions"
-            [plugins]="barChartNewCustomerPlugins"
-            [legend]="barChartNewCustomerLegend"
-            [type]="barChartNewCustomerType"
-          >
-          </canvas>
-        </div>
-      </nz-card>
-    </div>
-    <div nz-col [nzSpan]="12">
-      <nz-card>
-        <div class="chart-title">
-          <p>Số lượng khách hàng lũy kế</p>
-        </div>
-
-        <div class="chart-wrapper card">
-          <canvas
-            baseChart
-            [datasets]="barChartAccumulatedNumberOfCustomersData"
-            [labels]="barChartAccumulatedNumberOfCustomersLabels"
-            [options]="barChartAccumulatedNumberOfCustomersOptions"
-            [plugins]="barChartAccumulatedNumberOfCustomersPlugins"
-            [legend]="barChartAccumulatedNumberOfCustomersLegend"
-            [type]="barChartAccumulatedNumberOfCustomersType"
-          >
-          </canvas>
-        </div>
-      </nz-card>
-    </div>
+      <div class="chart-wrapper card">
+        <canvas
+          baseChart
+          [datasets]="barChartData"
+          [labels]="barChartLabels"
+          [options]="barChartOptions"
+          [plugins]="barChartPlugins"
+          [legend]="barChartLegend"
+          [type]="barChartType"
+        >
+        </canvas>
+      </div>
+    </nz-card>
   </div>
-  <div nz-row>
-    <div nz-col [nzSpan]="12">
-      <nz-card>
-        <div class="chart-title">
-          <p>Số lượng seller đang hoạt động</p>
-        </div>
-        <div class="chart-wrapper card">
-          <canvas
-            baseChart
-            [datasets]="lineChartNumberOfSellerData"
-            [labels]="lineChartNumberOfSellerLabels"
-            [options]="lineChartNumberOfSellerOptions"
-            [plugins]="lineChartNumberOfSellerPlugins"
-            [legend]="lineChartNumberOfSellerLegend"
-            [type]="lineChartNumberOfSellerType"
-          >
-          </canvas>
-        </div>
-      </nz-card>
-    </div>
-    <div nz-col [nzSpan]="12">
-      <nz-card>
-        <div class="chart-title">
-          <p>Số lượng khách hàng cần phê duyệt</p>
-        </div>
-        <div class="chart-wrapper card">
-          <canvas
-            baseChart
-            [datasets]="lineChartUnapprovedCustomersData"
-            [labels]="lineChartUnapprovedCustomersLabels"
-            [options]="lineChartUnapprovedCustomersOptions"
-            [plugins]="lineChartUnapprovedCustomersPlugins"
-            [legend]="lineChartUnapprovedCustomersLegend"
-            [type]="lineChartUnapprovedCustomersType"
-          >
-          </canvas>
-        </div>
-      </nz-card>
-    </div>
-  </div> -->
 </div>
