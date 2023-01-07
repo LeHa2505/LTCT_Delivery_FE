@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzSelectModule } from 'ng-zorro-antd/select';
 import { ComponentsModule } from 'src/app/shared/components/components.module';
 import { ShippingOrderListModule } from './shipping-order-list/shipping-order-list.module';
 import { ShippingOrderListComponent } from './shipping-order-list/shipping-order-list.component';
@@ -21,10 +22,11 @@ import { OrderDetailComponent } from './order-detail/order-detail.component';
 import { OrderFeeListComponent } from './order-fee-list/order-fee-list.component';
 import { OrderFeeDetailComponent } from './order-fee-detail/order-fee-detail.component';
 import { NzMessageModule } from 'ng-zorro-antd/message';
+import { DeliveryFeeCaculateComponent } from './delivery-fee-caculate/delivery-fee-caculate.component';
 
 
 @NgModule({
-  declarations: [DashboardComponent, ShippingOrderListComponent, OrderDetailComponent, OrderFeeListComponent, OrderFeeDetailComponent],
+  declarations: [DashboardComponent, ShippingOrderListComponent, OrderDetailComponent, OrderFeeListComponent, OrderFeeDetailComponent, DeliveryFeeCaculateComponent],
   imports: [
     CommonModule,
     PageRoutingModule,
@@ -42,7 +44,8 @@ import { NzMessageModule } from 'ng-zorro-antd/message';
     HttpClientModule,
     NzInputModule,
     NzFormModule,
-    NzMessageModule
+    NzMessageModule,
+    NzSelectModule
   ],
 })
 export class DashboardModule {}

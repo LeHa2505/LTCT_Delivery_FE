@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { DeliveryFeeCaculateComponent } from './delivery-fee-caculate/delivery-fee-caculate.component';
 import { OrderDetailComponent } from './order-detail/order-detail.component';
 import { OrderFeeDetailComponent } from './order-fee-detail/order-fee-detail.component';
 import { OrderFeeListComponent } from './order-fee-list/order-fee-list.component';
@@ -26,6 +27,10 @@ const routes: Routes = [
   {
     path: 'shipping-order-fee-detail/:code',
     component : OrderFeeDetailComponent
+  },
+  {
+    path: 'delivery-fee-caculate',
+    component : DeliveryFeeCaculateComponent
   }
 ];
 

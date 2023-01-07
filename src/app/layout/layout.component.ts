@@ -24,6 +24,11 @@ export class LayoutComponent implements OnInit {
       icon: 'transaction',
       url: 'shipping-order-fee-list',
     },
+    {
+      title: 'Tính phí ship',
+      icon: 'delivered-procedure',
+      url: 'delivery-fee-caculate',
+    },
   ];
 
   constructor() {}

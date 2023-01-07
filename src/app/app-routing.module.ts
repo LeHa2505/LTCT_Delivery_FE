@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { ShippingOrderListComponent } from './pages/shipping-order-list/shipping-order-list.component';
+import { NzSelectModule } from 'ng-zorro-antd/select';
 
 const routes: Routes = [
   {
