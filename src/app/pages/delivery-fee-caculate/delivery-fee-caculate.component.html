@@ -1,54 +1,110 @@
 <h2>Tính phí ship</h2>
 
-<!-- <app-loading *ngIf="!listOfDistrict"></app-loading> -->
-<nz-select
-  nzShowSearch
-  nzAllowClear
-  [(ngModel)]="selectedValue"
-  nzPlaceHolder="Chọn tỉnh/thành gửi"
->
-  <nz-option *ngFor="let item of listOfDistrict" nzLabel="{{ item }}" nzValue="{{ item }}"></nz-option>
-</nz-select>
+<div>
+  <label>Nơi gửi <span style="color: red">*</span></label>
+  <div nz-row>
+    <nz-select
+      nzShowSearch
+      nzAllowClear
+      [(ngModel)]="fromProvince"
+      (ngModelChange)="getFromDistricts()"
+      nzPlaceHolder="Chọn tỉnh/thành gửi"
+    >
+      <nz-option
+        *ngFor="let item of listOfProvince"
+        [nzLabel]="item.ProvinceName"
+        [nzValue]="item.ProvinceID"
+      ></nz-option>
+    </nz-select>
 
-<nz-select
-  nzShowSearch
-  nzAllowClear
-  [(ngModel)]="selectedValue"
-  nzPlaceHolder="Chọn quận/huyện gửi"
->
-  <nz-option *ngFor="let item of listOfProvince" nzLabel="{{ item }}" nzValue="{{ item }}"></nz-option>
-</nz-select>
+    <nz-select
+      nzShowSearch
+      nzAllowClear
+      [(ngModel)]="fromDistrict"
+      nzPlaceHolder="Chọn quận/huyện gửi"
+    >
+      <nz-option
+        *ngFor="let item of listOfFromDistrict"
+        [nzLabel]="item.DistrictName"
+        [nzValue]="item.DistrictID"
+      ></nz-option>
+    </nz-select>
+  </div>
+  <label>Nơi nhận <span style="color: red">*</span></label>
+  <div nz-row>
+    <nz-select
+      nzShowSearch
+      nzAllowClear
+      [(ngModel)]="toProvince"
+      (ngModelChange)="getToDistricts()"
+      nzPlaceHolder="Chọn tỉnh/thành gửi"
+    >
+      <nz-option
+        *ngFor="let item of listOfProvince"
+        [nzLabel]="item.ProvinceName"
+        [nzValue]="item.ProvinceID"
+      ></nz-option>
+    </nz-select>
 
-<nz-select
-  nzShowSearch
-  nzAllowClear
-  [(ngModel)]="selectedValue"
-  nzPlaceHolder="Chọn tỉnh/thành nhận"
->
-  <nz-option *ngFor="let item of listOfDistrict" nzLabel="{{ item }}" nzValue="{{ item }}"></nz-option>
-</nz-select>
+    <nz-select
+      nzShowSearch
+      nzAllowClear
+      [(ngModel)]="toDistrict"
+      (ngModelChange)="getToWards()"
+      nzPlaceHolder="Chọn quận/huyện nhận"
+    >
+      <nz-option
+        *ngFor="let item of listOfToDistrict"
+        [nzLabel]="item.DistrictName"
+        [nzValue]="item.DistrictID"
+      ></nz-option>
+    </nz-select>
 
-<nz-select
-  nzShowSearch
-  nzAllowClear
-  [(ngModel)]="selectedValue"
-  nzPlaceHolder="Chọn quận/huyện nhận"
->
-  <nz-option *ngFor="let item of listOfProvince" nzLabel="{{ item }}" nzValue="{{ item }}"></nz-option>
-</nz-select>
-
-
-<nz-select
-  nzShowSearch
-  nzAllowClear
-  [(ngModel)]="selectedValue"
-  nzPlaceHolder="Chọn xã/phường nhận"
->
-  <nz-option *ngFor="let item of listOfPrecinct" nzLabel="{{ item }}" nzValue="{{ item }}"></nz-option>
-</nz-select>
-
-<input nz-input placeholder="Tiền thu hộ" [(ngModel)]="fee" />
-
-<input nz-input placeholder="Khối lượng" [(ngModel)]="weight" />
-
-<h5 style="color: red;">Phí ship: </h5>
+    <nz-select
+      nzShowSearch
+      nzAllowClear
+      [(ngModel)]="toWard"
+      nzPlaceHolder="Chọn phường/xã nhận"
+    >
+      <nz-option
+        *ngFor="let item of listOfToWard"
+        [nzLabel]="item.WardName"
+        [nzValue]="item.WardCode"
+      ></nz-option>
+    </nz-select>
+  </div>
+  <label>Tiền thu hộ <span style="color: red">*</span></label
+  ><br />
+  <input
+    type="number"
+    nz-input
+    placeholder="Tiền thu hộ"
+    [(ngModel)]="cod"
+  /><br />
+  <button nz-button nzType="primary" (click)="getFee()">Tra cứu</button>
+  <h5 *ngIf="data" style="color: red; margin-top: 1em;">Phí ship:</h5>
+  <div *ngIf="data" style="margin: 1em 3em 3em 3em">
+    <p nz-row>
+      <b nz-col nzSpan="8">Tổng tiền dịch vụ : </b
+      ><span nz-col nzSpan="16">{{
+        data.totalFee | currency : "VND"
+      }}</span>
+    </p>
+    <p nz-row>
+      <b nz-col nzSpan="8">Phí dịch vụ chuyển phát thương mại điện tử : </b
+      ><span nz-col nzSpan="16">{{ data.serviceFee | currency : "VND" }}</span>
+    </p>
+    <p nz-row>
+      <b nz-col nzSpan="8">Phí khai giá hàng hóa : </b
+      ><span nz-col nzSpan="16">{{
+        data.insuranceFee | currency : "VND"
+      }}</span>
+    </p>
+    <p nz-row>
+      <b nz-col nzSpan="8">Phí gửi hàng tại bưu cục : </b
+      ><span nz-col nzSpan="16">{{
+        data.pickStationFee | currency : "VND"
+      }}</span>
+    </p>
+  </div>
+</div>
