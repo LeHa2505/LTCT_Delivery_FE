@@ -6,6 +6,7 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { ComponentsModule } from 'src/app/shared/components/components.module';
 import { ShippingOrderListComponent } from './shipping-order-list/shipping-order-list.component';
+import { FormsModule } from '@angular/forms';
 
 import { PageRoutingModule } from './page-routing.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -20,7 +21,6 @@ import { NzFormModule } from 'ng-zorro-antd/form';
 import { OrderDetailComponent } from './order-detail/order-detail.component';
 import { NzMessageModule } from 'ng-zorro-antd/message';
 import { DeliveryFeeCaculateComponent } from './delivery-fee-caculate/delivery-fee-caculate.component';
-import { FormsModule } from '@angular/forms';
 import { NzModalModule } from 'ng-zorro-antd/modal';
 
 
@@ -41,7 +41,6 @@ import { NzModalModule } from 'ng-zorro-antd/modal';
     NzIconModule,
     HttpClientModule,
     NzInputModule,
-    NzFormModule,
     NzMessageModule,
     NzSelectModule,
     FormsModule,

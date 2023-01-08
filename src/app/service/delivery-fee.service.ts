@@ -21,4 +21,8 @@ export class DeliveryFeeService {
       httpOptions
     );
   }
+
+  getDeliveryFee(): Observable<any> {
+    return this.http.get('http://tungsnk.tech:8082/api/shipping_fee');
+  }
 }
