@@ -9,6 +9,6 @@ export class DashboardService {
 
   constructor(private http: HttpClient) { }
   getDashboard(){
-    return this.http.get(environment.BASE_API_URI.MOCK_API + 'api/dashboard')
+    return this.http.get(environment.BASE_API_URI.BASE_SERVICE_SP10_API + 'api/dashboard')
   }
 }

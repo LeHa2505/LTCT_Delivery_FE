@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   BASE_API_URI: {
-    BASE_SERVICE_SP9_API: 'http://localhost:8082/',
+    BASE_SERVICE_SP10_API: 'http://tungsnk.tech:8082/',
     MOCK_API:'https://6385e9a5beaa6458266ce8e3.mockapi.io/'
   },
 };

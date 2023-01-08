@@ -10,14 +10,6 @@ const routes: Routes = [
       import('./pages/page.module').then((m) => m.DashboardModule),
   },
   {
-    path: 'shipping-order-list',
-    loadChildren: () =>
-      import('./pages/shipping-order-list/shipping-order-list.module').then((m) => m.ShippingOrderListModule),
-    // component: ShippingOrderListComponent
-  },
- 
-
-  {
     path: 'exception',
     loadChildren: () =>
       import('./shared/exception/exception.module').then(

@@ -2,7 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { ApiService } from './api.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,16 +11,17 @@ export class OrderListService {
   constructor(private http: HttpClient) {}
 
   getShippingOrder(): Observable<any> {
-    return this.http.get(environment.BASE_API_URI.BASE_SERVICE_SP9_API + 'api/v2/shipping');
+    return this.http.get(environment.BASE_API_URI.BASE_SERVICE_SP10_API + 'api/shipping_order');
   }
   getShippingOrderDetail(code : any): Observable<any> {
-    return this.http.get(environment.BASE_API_URI.BASE_SERVICE_SP9_API + 'api/v2/shipping' + code);
+    return this.http.get(environment.BASE_API_URI.BASE_SERVICE_SP10_API + 'api/shipping_order/' + code);
   }
-  getShippingFeeList():Observable<any>{
-    return this.http.get(environment.BASE_API_URI.BASE_SERVICE_SP9_API + 'api/v2/shipping/shipment')
+  getProductList(code : any): Observable<any> {
+    return this.http.get(environment.BASE_API_URI.BASE_SERVICE_SP10_API + 'api/shipping_order/product/' + code);
   }
-  getShippingFeeDetail(code : any):Observable<any>{
-    return this.http.get(environment.BASE_API_URI.BASE_SERVICE_SP9_API + 'api/v2/shipping/shipment' + code)
+  updateStatus(orderCode : string, body : any) : Observable<any>{
+    return this.http.put(environment.BASE_API_URI.BASE_SERVICE_SP10_API + 'api/shipping_order/' + orderCode, body);
   }
+
 }
 

@@ -1,22 +1,169 @@
+<app-breadcrumb [listBreadCrumb]="listBreadCrumb"></app-breadcrumb>
 <h2>Chi tiết đơn vận chuyển</h2>
 <app-loading *ngIf="!data"></app-loading>
-<div *ngIf="data" style="margin: 3em;">
-    <p>
-        <b>ID : </b>{{data.id}}
+<div *ngIf="data">
+  <div style="display: flex;justify-content: flex-end; margin-right: 2;">
+    <button
+      nz-button
+      nzType="primary"
+      (click)="showModal()"
+    >
+      Chuyển trạng thái
+    </button>
+    <button
+      nz-button
+      nzType="default"
+      routerLink="/shipping-order-list"
+    >
+      Trở về
+    </button>
+  </div>
+  <h4>Thông tin chung</h4>
+  <div style="margin:1em 3em 3em 3em;">
+    <!-- <p nz-row>
+        <b nz-col nzSpan="8">ID : </b>{{data.id}}
+    </p> -->
+    <p nz-row>
+        <b nz-col nzSpan="8">Mã đơn hàng : </b><span nz-col nzSpan="16">{{data.orderCode}}</span>
     </p>
-    <p>
-        <b>Mã đơn hàng : </b>{{data.orderCode}}
+    <p nz-row>
+        <b nz-col nzSpan="8">Ngày tạo đơn vận chuyển : </b><span nz-col nzSpan="16">{{data.createAt | date : "yyyy-mm-dd"}}</span>
     </p>
-    <p>
-        <b>Ngày tạo đơn vận chuyển : </b>{{data.createAt}}
+    <p nz-row>
+        <b nz-col nzSpan="8">Trạng thái : </b><span nz-col nzSpan="16">{{data.statusCode.desc}}</span>
     </p>
-    <p>
-        <b>Trạng thái : </b>{{data.statusCode.desc}}
+    <p nz-row>
+        <b nz-col nzSpan="8">Ghi chú : </b><span nz-col nzSpan="16">{{data.statusDetail}}</span>
     </p>
-    <p>
-        <b>Chi tiết trạng thái : </b>{{data.statusDetail}}
+    <p nz-row>
+        <b nz-col nzSpan="8">Cập nhật trạng thái lần cuối : </b><span nz-col nzSpan="16">{{data.updateAt | date : "yyyy-mm-dd"}}</span>
     </p>
-    <p>
-        <b>Thời gian cập nhật trạng thái : </b>{{data.updateAt}}
+    <p nz-row>
+      <b nz-col nzSpan="8">Địa chỉ kho : </b><span nz-col nzSpan="16">{{data.warehouseDetail}}</span>
     </p>
+    <p nz-row>
+      <b nz-col nzSpan="8">Tiền thu hộ : </b><span nz-col nzSpan="16">{{data.cod ? (data.cod | currency : 'VND') : ''}}</span>
+    </p>
+    <p nz-row>
+      <b nz-col nzSpan="8">Phí vận chuyển : </b><span nz-col nzSpan="16">{{data.totalShippingFee | currency : 'VND'}}</span>
+    </p>
+  </div>
+  <h4>Thông tin người nhận</h4>
+  <div style="margin:1em 3em 3em 3em;">
+    <p nz-row>
+        <b nz-col nzSpan="8">Tên người nhận : </b><span nz-col nzSpan="16">{{data.receiverName}}</span>
+    </p>
+    <p nz-row>
+      <b nz-col nzSpan="8">Số điện thoại : </b><span nz-col nzSpan="16">{{data.receiverPhone}}</span>
+    </p>
+    <p nz-row>
+      <b nz-col nzSpan="8">Địa chỉ : </b><span nz-col nzSpan="16">{{data.receiverDetail}}</span>
+    </p>
+  </div>
+  <h4>Thông tin vận chuyển</h4>
+  <div style="margin:1em 3em 3em 3em;">
+    <p nz-row>
+        <b nz-col nzSpan="8">Tổng tiền dịch vụ : </b><span nz-col nzSpan="16">{{data.totalShippingFee | currency : 'VND'}}</span>
+    </p>
+    <p nz-row>
+      <b nz-col nzSpan="8">Phí dịch vụ chuyển phát thương mại điện tử : </b><span nz-col nzSpan="16">{{data.serviceFee | currency : 'VND'}}</span>
+    </p>
+    <p nz-row>
+      <b nz-col nzSpan="8">Phí khai giá hàng hóa : </b><span nz-col nzSpan="16">{{data.insuranceFee | currency : 'VND'}}</span>
+    </p>
+    <p nz-row>
+      <b nz-col nzSpan="8">Phí gửi hàng tại bưu cục : </b><span nz-col nzSpan="16">{{data.pickStationFee | currency : 'VND'}}</span>
+    </p>
+  </div>
+  <h4>Thông tin hàng hóa</h4>
+  <h5>Danh sách hàng gửi</h5>
+  <div style="margin:1em 3em 3em 3em;">
+    <nz-table
+    *ngIf="productList"
+    #Table1 [nzData]="productList"
+    [nzTemplateMode]="true"
+    [nzShowPagination]="false"
+    [nzScroll]="{ y: '280px' }"
+    >
+      <thead>
+        <tr>
+          <th nzAlign="center">Mã sản phẩm</th>
+          <th nzAlign="center">Tên sản phẩm</th>
+          <th nzAlign="center">Màu</th>
+          <th nzAlign="center">Size</th>
+          <th nzAlign="center">Giá thành</th>
+          <th nzAlign="center">Số lượng</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data of productList; let i = index">
+          <ng-container *ngIf="data.status == 1">
+            <td nzAlign="center">{{ data.productId }}</td>
+            <td nzAlign="center">{{ data.name }}</td>
+            <td nzAlign="center">{{ data.color }}</td>
+            <td nzAlign="center">{{ data.size }}</td>
+            <td nzAlign="center">{{ data.price | currency : 'VND' }}</td>
+            <td nzAlign="center">{{ data.quantity }}</td>
+          </ng-container>
+        </tr>
+      </tbody>
+    </nz-table>
+  </div>
+  <h5>Danh sách hàng trả lại</h5>
+  <div style="margin:1em 3em 3em 3em;">
+    <nz-table
+    *ngIf="productList"
+    #Table [nzData]="productList"
+    [nzShowPagination]="false"
+    [nzTemplateMode]="true"
+    [nzScroll]="{ y: '280px' }"
+    >
+      <thead>
+        <tr>
+          <th nzAlign="center">Mã sản phẩm</th>
+          <th nzAlign="center">Tên sản phẩm</th>
+          <th nzAlign="center">Màu</th>
+          <th nzAlign="center">Size</th>
+          <th nzAlign="center">Giá thành</th>
+          <th nzAlign="center">Số lượng</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data of productList; let i = index">
+          <ng-container *ngIf="data.status == 0">
+            <td nzAlign="center">{{ data.productId }}</td>
+            <td>{{ data.name }}</td>
+            <td nzAlign="center">{{ data.color }}</td>
+            <td nzAlign="center">{{ data.size }}</td>
+            <td nzAlign="center">{{ data.price | currency : 'VND' }}</td>
+            <td nzAlign="center">{{ data.quantity }}</td>
+          </ng-container>
+        </tr>
+      </tbody>
+    </nz-table>
+  </div>
 </div>
+<nz-modal
+      [(nzVisible)]="isVisible"
+      [nzTitle]="modalTitle"
+      [nzContent]="modalContent"
+      [nzFooter]="modalFooter"
+      (nzOnCancel)="handleCancel()"
+      *ngIf="isVisible"
+    >
+      <ng-template #modalTitle>Cập nhật trạng thái</ng-template>
+
+      <ng-template #modalContent>
+        <p>Trạng thái <span style="color: red;">*</span>: </p>
+        <nz-select style="width: 100%;" nzShowSearch [(ngModel)]="statusForm.statusCode" (ngModelChange)="this.statusForm.statusDetail = ''">
+          <nz-option *ngFor="let item of listStatus" [nzLabel]="item.desc" [nzValue]="item.id"></nz-option>
+        </nz-select>
+        <p>Ghi chú : </p>
+        <textarea nz-input [(ngModel)]="statusForm.statusDetail"></textarea>
+      </ng-template>
+
+      <ng-template #modalFooter>
+        <button nz-button nzType="default" (click)="handleCancel()">Hủy</button>
+        <button nz-button nzType="primary" (click)="handleOk()">Lưu</button>
+      </ng-template>
+    </nz-modal>

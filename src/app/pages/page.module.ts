@@ -5,7 +5,6 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { ComponentsModule } from 'src/app/shared/components/components.module';
-import { ShippingOrderListModule } from './shipping-order-list/shipping-order-list.module';
 import { ShippingOrderListComponent } from './shipping-order-list/shipping-order-list.component';
 
 import { PageRoutingModule } from './page-routing.module';
@@ -19,14 +18,14 @@ import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { OrderDetailComponent } from './order-detail/order-detail.component';
-import { OrderFeeListComponent } from './order-fee-list/order-fee-list.component';
-import { OrderFeeDetailComponent } from './order-fee-detail/order-fee-detail.component';
 import { NzMessageModule } from 'ng-zorro-antd/message';
 import { DeliveryFeeCaculateComponent } from './delivery-fee-caculate/delivery-fee-caculate.component';
+import { FormsModule } from '@angular/forms';
+import { NzModalModule } from 'ng-zorro-antd/modal';
 
 
 @NgModule({
-  declarations: [DashboardComponent, ShippingOrderListComponent, OrderDetailComponent, OrderFeeListComponent, OrderFeeDetailComponent, DeliveryFeeCaculateComponent],
+  declarations: [DashboardComponent, ShippingOrderListComponent, OrderDetailComponent, DeliveryFeeCaculateComponent],
   imports: [
     CommonModule,
     PageRoutingModule,
@@ -40,12 +39,13 @@ import { DeliveryFeeCaculateComponent } from './delivery-fee-caculate/delivery-f
     NzGridModule,
     NzButtonModule,
     NzIconModule,
-    ShippingOrderListModule,
     HttpClientModule,
     NzInputModule,
     NzFormModule,
     NzMessageModule,
-    NzSelectModule
+    NzSelectModule,
+    FormsModule,
+    NzModalModule
   ],
 })
 export class DashboardModule {}
