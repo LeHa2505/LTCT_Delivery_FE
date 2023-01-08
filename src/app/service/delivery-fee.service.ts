@@ -8,6 +8,11 @@ const httpOptions = {
     Token: '11802752-8ab4-11ed-b190-ea4934f9883e',
   }),
 };
+const options = {
+  headers: new HttpHeaders({
+    'Access-Control-Allow-Origin': '*'
+  }),
+};
 
 @Injectable({
   providedIn: 'root',
@@ -41,6 +46,6 @@ export class DeliveryFeeService {
   }
 
   getDeliveryFee(body : any): Observable<any> {
-    return this.http.post(environment.BASE_API_URI.BASE_SERVICE_SP10_API + 'api/shipping_fee',body);
+    return this.http.post(environment.BASE_API_URI.BASE_SERVICE_SP10_API + 'api/shipping_fee',body,options);
   }
 }
