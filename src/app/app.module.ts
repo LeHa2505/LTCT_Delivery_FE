@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { ReactiveFormsModule } from '@angular/forms'; 
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -19,6 +20,7 @@ import { NzAnchorModule } from 'ng-zorro-antd/anchor';
 import { LayoutComponent } from './layout/layout.component';
 import { NgChartsModule } from 'ng2-charts';
 import { NzTableModule } from 'ng-zorro-antd/table';
+import { NzSelectModule } from 'ng-zorro-antd/select';
 
 registerLocaleData(vi);
 
@@ -37,7 +39,8 @@ registerLocaleData(vi);
     NgChartsModule,
     NzIconModule,
     NzButtonModule,
-    NzTableModule
+    NzTableModule,
+    NzSelectModule
   ],
   providers: [{ provide: NZ_I18N, useValue: vi_VN }],
   bootstrap: [AppComponent],

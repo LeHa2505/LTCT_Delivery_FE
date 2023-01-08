@@ -1,7 +1,54 @@
 <h2>Tính phí ship</h2>
 
-<nz-select ngModel="lucy" nzPlaceHolder="Chọn tỉnh/thành gửi">
-  <nz-option nzValue="jack" nzLabel="Jack"></nz-option>
-  <nz-option nzValue="lucy" nzLabel="Lucy"></nz-option>
-  <nz-option nzValue="disabled" nzLabel="Disabled" nzDisabled></nz-option>
+<!-- <app-loading *ngIf="!listOfDistrict"></app-loading> -->
+<nz-select
+  nzShowSearch
+  nzAllowClear
+  [(ngModel)]="selectedValue"
+  nzPlaceHolder="Chọn tỉnh/thành gửi"
+>
+  <nz-option *ngFor="let item of listOfDistrict" nzLabel="{{ item }}" nzValue="{{ item }}"></nz-option>
 </nz-select>
+
+<nz-select
+  nzShowSearch
+  nzAllowClear
+  [(ngModel)]="selectedValue"
+  nzPlaceHolder="Chọn quận/huyện gửi"
+>
+  <nz-option *ngFor="let item of listOfProvince" nzLabel="{{ item }}" nzValue="{{ item }}"></nz-option>
+</nz-select>
+
+<nz-select
+  nzShowSearch
+  nzAllowClear
+  [(ngModel)]="selectedValue"
+  nzPlaceHolder="Chọn tỉnh/thành nhận"
+>
+  <nz-option *ngFor="let item of listOfDistrict" nzLabel="{{ item }}" nzValue="{{ item }}"></nz-option>
+</nz-select>
+
+<nz-select
+  nzShowSearch
+  nzAllowClear
+  [(ngModel)]="selectedValue"
+  nzPlaceHolder="Chọn quận/huyện nhận"
+>
+  <nz-option *ngFor="let item of listOfProvince" nzLabel="{{ item }}" nzValue="{{ item }}"></nz-option>
+</nz-select>
+
+
+<nz-select
+  nzShowSearch
+  nzAllowClear
+  [(ngModel)]="selectedValue"
+  nzPlaceHolder="Chọn xã/phường nhận"
+>
+  <nz-option *ngFor="let item of listOfPrecinct" nzLabel="{{ item }}" nzValue="{{ item }}"></nz-option>
+</nz-select>
+
+<input nz-input placeholder="Tiền thu hộ" [(ngModel)]="fee" />
+
+<input nz-input placeholder="Khối lượng" [(ngModel)]="weight" />
+
+<h5 style="color: red;">Phí ship: </h5>

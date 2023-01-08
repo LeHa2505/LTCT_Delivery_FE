@@ -7,6 +7,7 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
 import { ComponentsModule } from 'src/app/shared/components/components.module';
 import { ShippingOrderListModule } from './shipping-order-list/shipping-order-list.module';
 import { ShippingOrderListComponent } from './shipping-order-list/shipping-order-list.component';
+import { FormsModule } from '@angular/forms';
 
 import { PageRoutingModule } from './page-routing.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -45,7 +46,8 @@ import { DeliveryFeeCaculateComponent } from './delivery-fee-caculate/delivery-f
     NzInputModule,
     NzFormModule,
     NzMessageModule,
-    NzSelectModule
+    NzSelectModule,
+    FormsModule
   ],
 })
 export class DashboardModule {}
