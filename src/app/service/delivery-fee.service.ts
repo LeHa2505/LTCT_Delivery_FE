@@ -15,14 +15,32 @@ const httpOptions = {
 export class DeliveryFeeService {
   constructor(private http: HttpClient) {}
 
-  getDeliveryShipInfo(): Observable<any> {
+  getProvinces(): Observable<any> {
     return this.http.get(
+      'https://online-gateway.ghn.vn/shiip/public-api/master-data/province',
+      httpOptions
+    );
+  }
+  getDistricts(id:any): Observable<any> {
+    return this.http.post(
       'https://online-gateway.ghn.vn/shiip/public-api/master-data/district',
+      {
+        "province_id":id
+      },
+      httpOptions
+    );
+  }
+  getWards(id:any): Observable<any> {
+    return this.http.post(
+      'https://online-gateway.ghn.vn/shiip/public-api/master-data/ward?district_id',
+      {
+        "district_id":id
+      },
       httpOptions
     );
   }
 
-  getDeliveryFee(): Observable<any> {
-    return this.http.get('http://tungsnk.tech:8082/api/shipping_fee');
+  getDeliveryFee(body : any): Observable<any> {
+    return this.http.post(environment.BASE_API_URI.BASE_SERVICE_SP10_API + 'api/shipping_fee',body);
   }
 }
