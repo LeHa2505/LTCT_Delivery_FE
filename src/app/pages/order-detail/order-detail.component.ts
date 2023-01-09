@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { OrderListService } from 'src/app/service/order-list.service';
+import { UpdateDebtStatusService } from 'src/app/service/update-debt-status.service';
 
 @Component({
   selector: 'app-order-detail',
@@ -51,7 +52,7 @@ export class OrderDetailComponent {
   orderCode : any;
   isVisible = false;
   statusForm : any = {};
-  constructor(private ser : OrderListService, private mess: NzMessageService, private rou : ActivatedRoute){}
+  constructor(private ser : OrderListService, private mess: NzMessageService, private rou : ActivatedRoute, private debt : UpdateDebtStatusService){}
   ngOnInit(): void {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
@@ -103,6 +104,9 @@ export class OrderDetailComponent {
             console.log(res);
             if (res.result.ok) {
               this.mess.success(`Cập nhật trạng thái đơn hàng ${orderCode} thành công!`)
+              if (this.statusForm.statusCode==3) {
+                this.updateDebtStatus(orderCode);
+              }
               this.data.statusCode.id = this.statusForm.statusCode;
               this.data.statusCode.desc = this.listStatus.find((item:any)=>item.id == this.statusForm.statusCode).desc;
               this.data.statusDetail = this.statusForm.statusDetail;
@@ -113,5 +117,18 @@ export class OrderDetailComponent {
           }
         );
   }
+  updateDebtStatus(orderCode){
+    this.debt.updateDebtStatus(orderCode).subscribe(
+      (res:any)=>{
+        if (res.status == 'success') {
+          this.mess.success("Cập nhật tình trạng công nợ thành công!");
+        } else this.mess.error("Cập nhật tình trạng công nợ không thành công!")
+      },
+      (err:any)=>{
+        this.mess.error("Cập nhật tình trạng công nợ không thành công!")
+      }
+    )
+  }
+
 
 }

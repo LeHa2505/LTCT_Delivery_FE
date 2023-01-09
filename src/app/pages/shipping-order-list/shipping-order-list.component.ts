@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NzButtonSize } from 'ng-zorro-antd/button';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { OrderListService } from 'src/app/service/order-list.service';
+import { UpdateDebtStatusService } from 'src/app/service/update-debt-status.service';
 
 
 @Component({
@@ -59,7 +60,7 @@ export class ShippingOrderListComponent {
 
   ]
 
-  constructor(private orderListService: OrderListService, private mess : NzMessageService) {
+  constructor(private orderListService: OrderListService, private mess : NzMessageService, private debt : UpdateDebtStatusService) {
   }
 
   ngOnInit(): void {
@@ -153,6 +154,9 @@ export class ShippingOrderListComponent {
             console.log(res);
             if (res.result.ok) {
               this.mess.success(`Cập nhật trạng thái đơn hàng ${orderCode} thành công!`)
+              if (this.statusForm.statusCode==3) {
+                this.updateDebtStatus(orderCode);
+              }
               this.listOfDisplayData.find((item:any)=>item.orderCode==orderCode).statusCode.id = this.statusForm.statusCode;
               this.listOfDisplayData.find((item:any)=>item.orderCode==orderCode).statusCode.desc = this.listStatus.find((item:any)=>item.id == this.statusForm.statusCode).desc;
               this.listOfDisplayData.find((item:any)=>item.orderCode==orderCode).statusDetail = this.statusForm.statusDetail;
@@ -165,6 +169,18 @@ export class ShippingOrderListComponent {
             this.mess.error(`Có lỗi xảy ra!`)
           }
         );
+  }
+  updateDebtStatus(orderCode){
+    this.debt.updateDebtStatus(orderCode).subscribe(
+      (res:any)=>{
+        if (res.status == 'success') {
+          this.mess.success("Cập nhật tình trạng công nợ thành công!");
+        } else this.mess.error("Cập nhật tình trạng công nợ không thành công!")
+      },
+      (err:any)=>{
+        this.mess.error("Cập nhật tình trạng công nợ không thành công!")
+      }
+    )
   }
   search(){
     if (this.filter.statusCode > 0) {
