@@ -27,6 +27,7 @@ export class DeliveryFeeCaculateComponent {
   cod : number = 0;
   //result
   data : any;
+  load = false;
   constructor(private service:DeliveryFeeService, private mess : NzMessageService) {}
 
   ngOnInit(): void {
@@ -112,6 +113,8 @@ export class DeliveryFeeCaculateComponent {
       this.mess.warning("Dữ liệu nhập vào không được để trống!");
       return;
     }
+    this.load = true
+    this.data = null
     this.service.getDeliveryFee({
         "from_district_id": this.fromDistrict,
         "to_district_id": this.toDistrict,
@@ -119,11 +122,13 @@ export class DeliveryFeeCaculateComponent {
         "cod_value": this.cod
     }).subscribe(
       (res:any) => {
+        this.load = false
         if (res.result.ok) {
           this.data = res.data;
         } else this.mess.error("Có lỗi xảy ra, vui lòng thử lại sau!")
       },
       (err : any) => {
+        this.load = false
         this.mess.error("Có lỗi xảy ra, vui lòng thử lại sau!")
       }
     )
