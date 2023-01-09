@@ -82,6 +82,7 @@
     [(ngModel)]="cod"
   /><br />
   <button nz-button nzType="primary" (click)="getFee()">Tra cứu</button>
+  <app-loading *ngIf="load"></app-loading>
   <h5 *ngIf="data" style="color: red; margin-top: 1em;">Phí ship:</h5>
   <div *ngIf="data" style="margin: 1em 3em 3em 3em">
     <p nz-row>
