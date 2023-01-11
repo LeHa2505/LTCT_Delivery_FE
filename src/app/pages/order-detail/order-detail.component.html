@@ -27,7 +27,7 @@
         <b nz-col nzSpan="8">Mã đơn hàng : </b><span nz-col nzSpan="16">{{data.orderCode}}</span>
     </p>
     <p nz-row>
-        <b nz-col nzSpan="8">Ngày tạo đơn vận chuyển : </b><span nz-col nzSpan="16">{{data.createAt | date : "yyyy-mm-dd"}}</span>
+        <b nz-col nzSpan="8">Ngày tạo đơn vận chuyển : </b><span nz-col nzSpan="16">{{data.createAt | date : "yyyy-MM-dd"}}</span>
     </p>
     <p nz-row>
         <b nz-col nzSpan="8">Trạng thái : </b><span nz-col nzSpan="16">{{data.statusCode.desc}}</span>
@@ -36,7 +36,7 @@
         <b nz-col nzSpan="8">Ghi chú : </b><span nz-col nzSpan="16">{{data.statusDetail}}</span>
     </p>
     <p nz-row>
-        <b nz-col nzSpan="8">Cập nhật trạng thái lần cuối : </b><span nz-col nzSpan="16">{{data.updateAt | date : "yyyy-mm-dd"}}</span>
+        <b nz-col nzSpan="8">Cập nhật trạng thái lần cuối : </b><span nz-col nzSpan="16">{{data.updateAt | date : "yyyy-MM-dd h:mm a"}}</span>
     </p>
     <p nz-row>
       <b nz-col nzSpan="8">Địa chỉ kho : </b><span nz-col nzSpan="16">{{data.warehouseDetail}}</span>
