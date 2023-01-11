@@ -177,7 +177,7 @@ export class ShippingOrderListComponent {
                 console.log(res);
                 if (res.result.ok) {
                   this.listOfData = [...res.data];
-                  this.listOfDisplayData = [...this.listOfData]
+                  this.search()
                 }else this.mess.error(res.result.message)
               },
               (error) => {
