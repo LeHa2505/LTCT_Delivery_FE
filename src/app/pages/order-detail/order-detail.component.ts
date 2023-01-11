@@ -20,6 +20,7 @@ export class OrderDetailComponent {
       route: '',
     },
   ];
+  currentStatus : any
   listStatus : any[] = [
     {
       id : 1,
@@ -81,6 +82,7 @@ export class OrderDetailComponent {
   }
   showModal(): void {
     this.statusForm.statusCode = this.data.statusCode.id;
+    this.currentStatus = this.data.statusCode.id;
     this.statusForm.statusDetail = this.data.statusDetail;
     this.isVisible = true;
   }
