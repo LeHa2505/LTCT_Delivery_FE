@@ -73,7 +73,7 @@
         <td nzAlign="center">{{ data.updateAt | date : 'yyyy-MM-dd h:mm a'}}</td>
         <td nzAlign="center"><span nz-icon nzType="eye" nzTheme="outline" routerLink="/shipping-order-detail/{{data.id}}/{{data.orderCode}}"></span></td>
         <td nzAlign="center">
-            <span nz-icon nzType="swap" nzTheme="outline" (click)="showModal(false, data)"></span>
+            <span class="pointer" nz-icon nzType="swap" nzTheme="outline" (click)="showModal(false, data)"></span>
         </td>
       </tr>
     </tbody>
