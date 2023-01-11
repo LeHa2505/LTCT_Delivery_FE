@@ -107,9 +107,16 @@ export class OrderDetailComponent {
               if (this.statusForm.statusCode==3) {
                 this.updateDebtStatus(orderCode);
               }
-              this.data.statusCode.id = this.statusForm.statusCode;
-              this.data.statusCode.desc = this.listStatus.find((item:any)=>item.id == this.statusForm.statusCode).desc;
-              this.data.statusDetail = this.statusForm.statusDetail;
+              this.ser.getShippingOrderDetail(this.id).subscribe(
+                (res:any)=>{
+                  if(res.result.ok){
+                    this.data = res.data;
+                  } else this.mess.error(res.result.message);
+                },
+                (error)=>{
+                  this.mess.error("Có lỗi xảy ra!");
+                }
+              );
             } else this.mess.error(res.result.message)
           },
           (error) => {

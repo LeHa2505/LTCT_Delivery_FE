@@ -29,7 +29,7 @@
     <button
       nz-button
       nzType="primary"
-      [disabled]="setOfCheckedId.size === 0"
+      [disabled]="disabledButton"
       (click)="showModal(true)"
     >
       Chuyển trạng thái
@@ -67,10 +67,10 @@
             (nzCheckedChange)="onItemChecked(data.orderCode, $event)"
           ></td>
         <td nzAlign="center">{{ data.orderCode }}</td>
-        <td nzAlign="center">{{ data.createAt | date : "yyyy-mm-dd" }}</td>
+        <td nzAlign="center">{{ data.createAt | date : "yyyy-MM-dd" }}</td>
         <td nzAlign="center">{{ data.statusCode.desc }}</td>
         <td>{{ data.statusDetail }}</td>
-        <td nzAlign="center">{{ data.updateAt | date : 'yyyy-mm-dd h:mm a'}}</td>
+        <td nzAlign="center">{{ data.updateAt | date : 'yyyy-MM-dd h:mm a'}}</td>
         <td nzAlign="center"><span nz-icon nzType="eye" nzTheme="outline" routerLink="/shipping-order-detail/{{data.id}}/{{data.orderCode}}"></span></td>
         <td nzAlign="center">
             <span nz-icon nzType="swap" nzTheme="outline" (click)="showModal(false, data)"></span>
@@ -92,8 +92,38 @@
       <ng-template #modalContent>
         <p>Trạng thái <span style="color: red;">*</span>: </p>
         <nz-select style="width: 100%;" nzShowSearch [(ngModel)]="statusForm.statusCode" (ngModelChange)="this.statusForm.statusDetail = ''">
-          <nz-option *ngFor="let item of listStatus" [nzLabel]="item.desc" [nzValue]="item.id"></nz-option>
+          <ng-container [ngSwitch]="statusForm.statusCode">
+            <ng-container *ngSwitchCase="1">
+              <nz-option [nzLabel]="listStatus[0].desc" [nzValue]="listStatus[0].id"></nz-option>
+              <nz-option [nzLabel]="listStatus[1].desc" [nzValue]="listStatus[1].id"></nz-option>
+            </ng-container>
+            <ng-container *ngSwitchCase="2">
+              <nz-option [nzLabel]="listStatus[1].desc" [nzValue]="listStatus[1].id"></nz-option>
+              <nz-option [nzLabel]="listStatus[2].desc" [nzValue]="listStatus[2].id"></nz-option>
+            </ng-container>
+            <ng-container *ngSwitchCase="3">
+              <nz-option [nzLabel]="listStatus[2].desc" [nzValue]="listStatus[2].id"></nz-option>
+              <nz-option [nzLabel]="listStatus[3].desc" [nzValue]="listStatus[3].id"></nz-option>
+              <nz-option [nzLabel]="listStatus[4].desc" [nzValue]="listStatus[4].id"></nz-option>
+            </ng-container>
+            <ng-container *ngSwitchCase="5">
+              <nz-option [nzLabel]="listStatus[3].desc" [nzValue]="listStatus[3].id"></nz-option>
+              <nz-option [nzLabel]="listStatus[0].desc" [nzValue]="listStatus[0].id"></nz-option>
+            </ng-container>
+            <ng-container *ngSwitchCase="6">
+              <nz-option [nzLabel]="listStatus[4].desc" [nzValue]="listStatus[4].id"></nz-option>
+              <nz-option [nzLabel]="listStatus[5].desc" [nzValue]="listStatus[5].id"></nz-option>
+            </ng-container>
+            <ng-container *ngSwitchCase="7">
+              <nz-option [nzLabel]="listStatus[5].desc" [nzValue]="listStatus[5].id"></nz-option>
+            </ng-container>
+            <ng-container *ngSwitchDefault>
+              <nz-option *ngFor="let item of listStatus" [nzLabel]="item.desc" [nzValue]="item.id"></nz-option>
+            </ng-container>
+          </ng-container>
         </nz-select>
+
+
         <p>Ghi chú : </p>
         <textarea nz-input [(ngModel)]="statusForm.statusDetail"></textarea>
       </ng-template>

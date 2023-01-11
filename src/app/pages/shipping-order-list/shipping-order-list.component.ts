@@ -22,7 +22,9 @@ export class ShippingOrderListComponent {
   isVisible = false;
   statusForm : any = {};
   clickedOrder : any;
-  filter : any = {}
+  filter : any = {
+    orderCode : ''
+  }
 
   listOfData : any[]
   listOfDisplayData : any[];
@@ -32,6 +34,7 @@ export class ShippingOrderListComponent {
   setOfCheckedId = new Set<any>();
   isMultiUpdate = false;
 
+  disabledButton = true
   listStatus : any[] = [
     {
       id : 1,
@@ -102,6 +105,8 @@ export class ShippingOrderListComponent {
   onItemChecked(item: any, checked: boolean): void {
     this.updateCheckedSet(item, checked);
     this.refreshCheckedStatus();
+    this.disabledButton = !this.isSameStatus();
+    console.log(this.disabledButton)
   }
 
   onAllChecked(checked: boolean): void {
@@ -109,11 +114,14 @@ export class ShippingOrderListComponent {
       .filter(({ disabled }) => !disabled)
       .forEach(({ orderCode }) => this.updateCheckedSet(orderCode, checked));
     this.refreshCheckedStatus();
+    this.disabledButton = !this.isSameStatus();
+    console.log(this.disabledButton)
+
   }
 
   showModal(isMultiUpdate : boolean, order ?: any): void {
     this.isMultiUpdate = isMultiUpdate;
-    this.statusForm.statusCode = null;
+    // this.statusForm.statusCode = null;
     this.statusForm.statusDetail = '';
     if (order) {
       this.clickedOrder = order;
@@ -157,12 +165,25 @@ export class ShippingOrderListComponent {
               if (this.statusForm.statusCode==3) {
                 this.updateDebtStatus(orderCode);
               }
-              this.listOfDisplayData.find((item:any)=>item.orderCode==orderCode).statusCode.id = this.statusForm.statusCode;
-              this.listOfDisplayData.find((item:any)=>item.orderCode==orderCode).statusCode.desc = this.listStatus.find((item:any)=>item.id == this.statusForm.statusCode).desc;
-              this.listOfDisplayData.find((item:any)=>item.orderCode==orderCode).statusDetail = this.statusForm.statusDetail;
-              this.listOfData.find((item:any)=>item.orderCode==orderCode).statusCode.id = this.statusForm.statusCode;
-              this.listOfData.find((item:any)=>item.orderCode==orderCode).statusCode.desc = this.listStatus.find((item:any)=>item.id == this.statusForm.statusCode).desc;
-              this.listOfData.find((item:any)=>item.orderCode==orderCode).statusDetail = this.statusForm.statusDetail;
+              // this.listOfDisplayData.find((item:any)=>item.orderCode==orderCode).statusCode.id = this.statusForm.statusCode;
+              // this.listOfDisplayData.find((item:any)=>item.orderCode==orderCode).statusCode.desc = this.listStatus.find((item:any)=>item.id == this.statusForm.statusCode).desc;
+              // this.listOfDisplayData.find((item:any)=>item.orderCode==orderCode).statusDetail = this.statusForm.statusDetail;
+              // this.listOfData.find((item:any)=>item.orderCode==orderCode).statusCode.id = this.statusForm.statusCode;
+              // this.listOfData.find((item:any)=>item.orderCode==orderCode).statusCode.desc = this.listStatus.find((item:any)=>item.id == this.statusForm.statusCode).desc;
+              // this.listOfData.find((item:any)=>item.orderCode==orderCode).statusDetail = this.statusForm.statusDetail;
+              // let item = this.listOfDisplayData.find((item:any)=>item.orderCode==orderCode)
+              this.orderListService.getShippingOrder().subscribe(
+                (res : any) => {
+                console.log(res);
+                if (res.result.ok) {
+                  this.listOfData = [...res.data];
+                  this.listOfDisplayData = [...this.listOfData]
+                }else this.mess.error(res.result.message)
+              },
+              (error) => {
+                this.mess.error('Có lỗi xảy ra!')
+              });
+
             } else this.mess.error(res.result.message)
           },
           (error) => {
@@ -189,7 +210,36 @@ export class ShippingOrderListComponent {
 
     this.listOfDisplayData = this.listOfDisplayData.filter((item:any)=>item.orderCode.toLowerCase().indexOf(this.filter.orderCode.trim().toLowerCase()) > -1);
   }
-
-
+  isSameStatus(){
+    const arr = [...this.setOfCheckedId]
+    if (this.setOfCheckedId.size == 0) {
+      return false
+    }
+    if (this.setOfCheckedId.size == 1) {
+      this.listOfData.forEach((item:any)=>{
+        if (item.orderCode == arr[0]) {
+          this.statusForm.statusCode = item.statusCode.id
+          console.log(this.statusForm)
+        }
+      })
+      return true
+    }
+    for (let index = 0; index < arr.length - 1; index++) {
+      let element1 : any;
+      let element2  : any;
+      this.listOfData.forEach((item:any)=>{
+        if (item.orderCode == arr[index]) {
+          element1 = {...item};
+        } else if (item.orderCode == arr[index+1]) {
+          element2 = {...item};
+        }
+      })
+      this.statusForm.statusCode = element1.statusCode.id;
+      if (element1.statusCode.id != element2.statusCode.id) {
+        return false;
+      }
+    }
+    return true;
+  }
 }
 
