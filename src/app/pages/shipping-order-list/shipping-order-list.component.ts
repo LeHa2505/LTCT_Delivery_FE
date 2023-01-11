@@ -21,6 +21,7 @@ export class ShippingOrderListComponent {
 
   isVisible = false;
   statusForm : any = {};
+  currentStatus : any
   clickedOrder : any;
   filter : any = {
     orderCode : ''
@@ -126,6 +127,7 @@ export class ShippingOrderListComponent {
     if (order) {
       this.clickedOrder = order;
       this.statusForm.statusCode = order.statusCode.id;
+      this.currentStatus = order.statusCode.id;
       this.statusForm.statusDetail = order.statusDetail;
       console.log(this.statusForm)
     }
@@ -219,6 +221,7 @@ export class ShippingOrderListComponent {
       this.listOfData.forEach((item:any)=>{
         if (item.orderCode == arr[0]) {
           this.statusForm.statusCode = item.statusCode.id
+          this.currentStatus = item.statusCode.id
           console.log(this.statusForm)
         }
       })
@@ -235,6 +238,7 @@ export class ShippingOrderListComponent {
         }
       })
       this.statusForm.statusCode = element1.statusCode.id;
+      this.currentStatus = element1.statusCode.id;
       if (element1.statusCode.id != element2.statusCode.id) {
         return false;
       }
