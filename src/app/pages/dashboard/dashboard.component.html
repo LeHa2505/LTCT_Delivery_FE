@@ -6,7 +6,7 @@
     <div nz-row>
       <div class="card-item" nz-col [nzXl]="6" [nzSm]="12" [nzXs]="24">
         <div>
-          <span class="card-number">{{data.orderQuantityByStatus['1']}}</span
+          <span class="card-number">{{ data.orderQuantityByStatus["1"] }}</span
           ><span
             class="card-icon"
             nz-icon
@@ -14,11 +14,11 @@
             nzTheme="outline"
           ></span>
         </div>
-        <p class="card-title">Đơn hàng chưa giao</p>
+        <p class="card-title">Tổng đơn hàng</p>
       </div>
       <div class="card-item" nz-col [nzXl]="6" [nzSm]="12" [nzXs]="24">
         <div>
-          <span class="card-number">{{data.orderQuantityByStatus['2']}}</span
+          <span class="card-number">{{ data.orderQuantityByStatus["2"] }}</span
           ><span
             class="card-icon"
             nz-icon
@@ -30,7 +30,7 @@
       </div>
       <div class="card-item" nz-col [nzXl]="6" [nzSm]="12" [nzXs]="24">
         <div>
-          <span class="card-number">{{data.orderQuantityByStatus['3']}}</span
+          <span class="card-number">{{ data.orderQuantityByStatus["3"] }}</span
           ><span
             class="card-icon"
             nz-icon
@@ -38,11 +38,11 @@
             nzTheme="outline"
           ></span>
         </div>
-        <p class="card-title">Đơn hàng đã giao</p>
+        <p class="card-title">Đơn hàng giao thành công</p>
       </div>
       <div class="card-item" nz-col [nzXl]="6" [nzSm]="12" [nzXs]="24">
         <div>
-          <span class="card-number">{{data.orderQuantityByStatus['4']}}</span
+          <span class="card-number">{{ data.orderQuantityByStatus["4"] }}</span
           ><span
             class="card-icon"
             nz-icon
@@ -54,6 +54,54 @@
       </div>
     </div>
   </nz-card>
+
+  <nz-row>
+    <!--List request table-->
+    <div nz-col nzSpan="12">
+      <nz-table #basicTable [nzData]="listOfData">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Address</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of listOfData">
+            <td>{{ data.orderCode }}</td>
+            <td>{{ data.createAt }}</td>
+            <td>{{ data.statusDetail }}</td>
+            <td nzAlign="center">
+              <span
+                nz-icon
+                nzType="eye"
+                nzTheme="outline"
+                routerLink="/shipping-order-detail/{{ data.id }}/{{
+                  data.orderCode
+                }}"
+              ></span>
+            </td>
+          </tr>
+        </tbody>
+      </nz-table>
+    </div>
+    <!--Pie Chart-->
+    <div nz-col [nzSpan]="12">
+      <div style="width: 60%; margin-left: auto; margin-right: auto">
+        <canvas
+          baseChart
+          [datasets]="pieChartNumberOfSpendingData"
+          [labels]="pieChartNumberOfSpendingLabels"
+          [options]="pieChartNumberOfSpendingOptions"
+          [plugins]="pieChartNumberOfSpendingPlugins"
+          [legend]="pieChartNumberOfSpendingLegend"
+          [type]="pieChartNumberOfSpendingType"
+        >
+        </canvas>
+      </div>
+    </div>
+  </nz-row>
 
   <!-- chart  -->
   <div>
