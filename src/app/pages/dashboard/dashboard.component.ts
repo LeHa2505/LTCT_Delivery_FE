@@ -72,7 +72,8 @@ export class DashboardComponent implements OnInit {
       label: '',
     },
   ];
-  orderQuantityByStatus: number = 0;
+  orderQuantityByStatus: any = [];
+  orderQuantityByStatusTotal: any;
   constructor(
     private ser: DashboardService,
     private mess: NzMessageService,
@@ -96,8 +97,13 @@ export class DashboardComponent implements OnInit {
           this.pieChartNumberOfSpendingData[0].data.push(
             this.data.orderQuantityByStatus['7']
           );
-          // console.log("jhghjgjhjhgjhg"+this.orderQuantityByStatus);
-          
+          this.orderQuantityByStatus = Object.values(
+            this.data.orderQuantityByStatus
+          );
+          this.orderQuantityByStatusTotal = this.orderQuantityByStatus.reduce(
+            (partialSum, a) => partialSum + a,
+            0
+          );
         } else this.mess.error(res.result.message);
       },
       (error: any) => {
