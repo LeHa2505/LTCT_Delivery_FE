@@ -126,7 +126,7 @@ export class DashboardComponent implements OnInit {
         if (res.result.ok) {
           this.listOfData = [...res.data];
           this.listOfData.forEach((element) => {
-            if (element.statusCode.id == 5) {
+            if (element.statusCode.id == 5 || element.statusCode.id == 6) {
               this.listOfDisplayData.push(element);
             }
           }, console.log(this.listOfDisplayData));

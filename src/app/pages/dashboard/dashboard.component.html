@@ -59,7 +59,7 @@
     <!--List request table-->
     <div nz-col nzSpan="12">
     <h4 style="margin-bottom: 1rem;">Danh sách đơn hàng cần giao lại</h4>
-      <nz-table #basicTable [nzData]="listOfDisplayData">
+      <nz-table #basicTable [nzData]="listOfDisplayData" [nzScroll]="{ y: '240px' }">
         <thead>
           <tr>
             <th>Mã đơn hàng	</th>
