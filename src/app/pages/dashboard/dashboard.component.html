@@ -6,7 +6,7 @@
     <div nz-row>
       <div class="card-item" nz-col [nzXl]="6" [nzSm]="12" [nzXs]="24">
         <div>
-          <span class="card-number">{{data.orderQuantityByStatus['1']}}</span
+          <span class="card-number">{{ orderQuantityByStatusTotal }}</span
           ><span
             class="card-icon"
             nz-icon
@@ -14,11 +14,11 @@
             nzTheme="outline"
           ></span>
         </div>
-        <p class="card-title">Đơn hàng chưa giao</p>
+        <p class="card-title">Tổng đơn hàng</p>
       </div>
       <div class="card-item" nz-col [nzXl]="6" [nzSm]="12" [nzXs]="24">
         <div>
-          <span class="card-number">{{data.orderQuantityByStatus['2']}}</span
+          <span class="card-number">{{ data.orderQuantityByStatus["2"] }}</span
           ><span
             class="card-icon"
             nz-icon
@@ -30,7 +30,7 @@
       </div>
       <div class="card-item" nz-col [nzXl]="6" [nzSm]="12" [nzXs]="24">
         <div>
-          <span class="card-number">{{data.orderQuantityByStatus['3']}}</span
+          <span class="card-number">{{ data.orderQuantityByStatus["3"] }}</span
           ><span
             class="card-icon"
             nz-icon
@@ -38,11 +38,11 @@
             nzTheme="outline"
           ></span>
         </div>
-        <p class="card-title">Đơn hàng đã giao</p>
+        <p class="card-title">Đơn hàng giao thành công</p>
       </div>
       <div class="card-item" nz-col [nzXl]="6" [nzSm]="12" [nzXs]="24">
         <div>
-          <span class="card-number">{{data.orderQuantityByStatus['4']}}</span
+          <span class="card-number">{{ data.orderQuantityByStatus["4"] }}</span
           ><span
             class="card-icon"
             nz-icon
@@ -54,6 +54,55 @@
       </div>
     </div>
   </nz-card>
+
+  <nz-row style="margin: 2em 1em">
+    <!--List request table-->
+    <div nz-col nzSpan="12">
+    <h4 style="margin-bottom: 1rem;">Danh sách đơn hàng cần giao lại</h4>
+      <nz-table #basicTable [nzData]="listOfDisplayData" [nzScroll]="{ y: '240px' }">
+        <thead>
+          <tr>
+            <th>Mã đơn hàng	</th>
+            <th>Ngày tạo đơn vận chuyển	</th>
+            <th>Ghi chú</th>
+            <th>Chi tiết</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of listOfDisplayData">
+            <td nzAlign="center">{{ data.orderCode }}</td>
+            <td nzAlign="center">{{ data.createAt | date : "yyyy-MM-dd"}}</td>
+            <td nzAlign="center">{{ data.statusDetail }}</td>
+            <td nzAlign="center">
+              <span
+                nz-icon
+                nzType="eye"
+                nzTheme="outline"
+                routerLink="/shipping-order-detail/{{ data.id }}/{{
+                  data.orderCode
+                }}"
+              ></span>
+            </td>
+          </tr>
+        </tbody>
+      </nz-table>
+    </div>
+    <!--Pie Chart-->
+    <div nz-col [nzSpan]="12">
+      <div style="height: 90%; display: flex; justify-content: center; min-height: 410px;">
+        <canvas
+          baseChart
+          [datasets]="pieChartNumberOfSpendingData"
+          [labels]="pieChartNumberOfSpendingLabels"
+          [options]="pieChartNumberOfSpendingOptions"
+          [plugins]="pieChartNumberOfSpendingPlugins"
+          [legend]="pieChartNumberOfSpendingLegend"
+          [type]="pieChartNumberOfSpendingType"
+        >
+        </canvas>
+      </div>
+    </div>
+  </nz-row>
 
   <!-- chart  -->
   <div>

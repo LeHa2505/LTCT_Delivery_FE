@@ -22,10 +22,16 @@ import { OrderDetailComponent } from './order-detail/order-detail.component';
 import { NzMessageModule } from 'ng-zorro-antd/message';
 import { DeliveryFeeCaculateComponent } from './delivery-fee-caculate/delivery-fee-caculate.component';
 import { NzModalModule } from 'ng-zorro-antd/modal';
+import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
 
 
 @NgModule({
-  declarations: [DashboardComponent, ShippingOrderListComponent, OrderDetailComponent, DeliveryFeeCaculateComponent],
+  declarations: [
+    DashboardComponent,
+    ShippingOrderListComponent,
+    OrderDetailComponent,
+    DeliveryFeeCaculateComponent,
+  ],
   imports: [
     CommonModule,
     PageRoutingModule,
@@ -44,7 +50,9 @@ import { NzModalModule } from 'ng-zorro-antd/modal';
     NzMessageModule,
     NzSelectModule,
     FormsModule,
-    NzModalModule
+    NzModalModule,
+    NzBreadCrumbModule,
+
   ],
 })
 export class DashboardModule {}

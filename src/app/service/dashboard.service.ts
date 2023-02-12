@@ -17,4 +17,7 @@ export class DashboardService {
   getDashboard(){
     return this.http.get(environment.BASE_API_URI.BASE_SERVICE_SP10_API + 'api/dashboard',options)
   }
+  getStatus(){
+    return this.http.get(environment.BASE_API_URI.BASE_SERVICE_SP10_API + 'api/status')
+  }
 }

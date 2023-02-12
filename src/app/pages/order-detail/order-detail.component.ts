@@ -46,6 +46,10 @@ export class OrderDetailComponent {
       id : 7,
       desc : "đã nhận hàng trả lại"
     },
+    {
+      id : 8,
+      desc : "không thành công"
+    },
   ]
   data : any;
   productList : any[];
