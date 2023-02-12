@@ -6,7 +6,7 @@
     <div nz-row>
       <div class="card-item" nz-col [nzXl]="6" [nzSm]="12" [nzXs]="24">
         <div>
-          <span class="card-number">{{ data.orderQuantityByStatus["1"] }}</span
+          <span class="card-number">{{ orderQuantityByStatus }}</span
           ><span
             class="card-icon"
             nz-icon
@@ -55,23 +55,24 @@
     </div>
   </nz-card>
 
-  <nz-row>
+  <nz-row style="margin: 2em 1em">
     <!--List request table-->
     <div nz-col nzSpan="12">
-      <nz-table #basicTable [nzData]="listOfData">
+    <h4 style="margin-bottom: 1rem;">Danh sách đơn hàng cần giao lại</h4>
+      <nz-table #basicTable [nzData]="listOfDisplayData">
         <thead>
           <tr>
-            <th>Name</th>
-            <th>Age</th>
-            <th>Address</th>
-            <th>Action</th>
+            <th>Mã đơn hàng	</th>
+            <th>Ngày tạo đơn vận chuyển	</th>
+            <th>Ghi chú</th>
+            <th>Chi tiết</th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let data of listOfData">
-            <td>{{ data.orderCode }}</td>
-            <td>{{ data.createAt }}</td>
-            <td>{{ data.statusDetail }}</td>
+          <tr *ngFor="let data of listOfDisplayData">
+            <td nzAlign="center">{{ data.orderCode }}</td>
+            <td nzAlign="center">{{ data.createAt | date : "yyyy-MM-dd"}}</td>
+            <td nzAlign="center">{{ data.statusDetail }}</td>
             <td nzAlign="center">
               <span
                 nz-icon
@@ -88,7 +89,7 @@
     </div>
     <!--Pie Chart-->
     <div nz-col [nzSpan]="12">
-      <div style="width: 60%; margin-left: auto; margin-right: auto">
+      <div style="height: 90%; display: flex; justify-content: center; min-height: 410px;">
         <canvas
           baseChart
           [datasets]="pieChartNumberOfSpendingData"
