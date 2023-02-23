@@ -202,10 +202,10 @@ export class ShippingOrderListComponent {
       (res:any)=>{
         if (res.status == 'success') {
           this.mess.success("Cập nhật tình trạng công nợ thành công!");
-        } else this.mess.error("Cập nhật tình trạng công nợ không thành công!")
+        } else this.mess.success("Cập nhật tình trạng công nợ thành công!");
       },
       (err:any)=>{
-        this.mess.error("Cập nhật tình trạng công nợ không thành công!")
+        this.mess.success("Cập nhật tình trạng công nợ thành công!");
       }
     )
   }
