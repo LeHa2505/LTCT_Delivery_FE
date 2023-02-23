@@ -92,11 +92,11 @@ export class DashboardComponent implements OnInit {
             this.data.orderQuantityByStatus['3']
           );
           this.pieChartNumberOfSpendingData[0].data.push(
-            this.data.orderQuantityByStatus['4']
+            this.data.orderQuantityByStatus['8']
           );
-          this.pieChartNumberOfSpendingData[0].data.push(
-            this.data.orderQuantityByStatus['7']
-          );
+          // this.pieChartNumberOfSpendingData[0].data.push(
+          //   this.data.orderQuantityByStatus['7']
+          // );
           this.orderQuantityByStatus = Object.values(
             this.data.orderQuantityByStatus
           );
@@ -118,6 +118,7 @@ export class DashboardComponent implements OnInit {
           this.pieChartNumberOfSpendingLabels.push(element.desc);
         }
       }, console.log(this.pieChartNumberOfSpendingLabels));
+      this.pieChartNumberOfSpendingLabels = ["Thành công", "Không thành công"];
     });
 
     this.orderListService.getShippingOrder().subscribe(
